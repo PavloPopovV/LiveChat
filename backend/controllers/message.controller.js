@@ -25,7 +25,7 @@ export const sendMessage = async (req, res) => {
     // SOCKET IO FUNCTIONALITY WILL GO HERE
 
     await Promise.all([conversation.save(), newMessage.save()]);
-    res.status(201).json({ newMessage });
+    res.status(201).json({newMessage });
   } catch (err) {
     return res.status(500).json({ message: "Something went wrong" });
   }

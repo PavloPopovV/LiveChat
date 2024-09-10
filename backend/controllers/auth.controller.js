@@ -30,7 +30,7 @@ export const signup = async (req, res) => {
     if (newUser) {
       generateTokenAndSetCookie(newUser._id, res);
       await newUser.save();
-      res.status(201).json({ newUser });
+      res.status(201).json({ user:newUser });
     } else {
       res.status(400).json({ message: "Invalid user data" });
     }
@@ -46,13 +46,13 @@ export const login = async (req, res) => {
     const user = await UserModel.findOne({ username });
 
     // check password correct
-    const isPasswordCorreect = await bcrypt.compare(
+    const isPasswordCorrect = await bcrypt.compare(
       password,
       user?.password || ""
     );
 
-    if (!user || !isPasswordCorreect)
-      return res.status(400).json({ message: "Invalid credentials" });
+    if (!user || !isPasswordCorrect)
+      return res.status(400).json({ message: "Wrong password or username" });
 
     generateTokenAndSetCookie(user._id, res);
     res.status(200).json({ user });
