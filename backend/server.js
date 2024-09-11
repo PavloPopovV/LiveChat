@@ -17,7 +17,9 @@ const __dirname = path.resolve()
 dotenv.config()
 app.use(cors({
     origin:['https://chat-app-prod-d0xl.onrender.com','http://localhost:3000'],
-    credentials:true
+    credentials:true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json())
 app.use(cookieParser())
